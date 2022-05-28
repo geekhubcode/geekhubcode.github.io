@@ -21,6 +21,14 @@ async function loadNames() {
 
     let bullstart = latesthalving - 70000;
     let bullend = latesthalving + 70000;
+    let nextbullstart = nexthalving - 70000;
+
+    let remainingblocktillnextbullstart = nextbullstart - latestblock;
+    let daytillnextbullstart = (remainingblocktillnextbullstart * 10) / 1440;
+
+    let remainingblocktillendofbullrun = bullend - latestblock;
+    let daytillendofbullrun = (remainingblocktillendofbullrun * 10) / 1440;
+
     document.getElementById("bullstart").innerHTML = bullstart;
     document.getElementById("bullend").innerHTML = bullend;
 
@@ -28,15 +36,28 @@ async function loadNames() {
 
     document.getElementById("nexthalving").innerHTML = nexthalving;
 
+
+
+
+
     if (blocksincehalving + 70000 > 140000) {
         document.getElementById("santimant").innerHTML = "<div>bearmarket</div>";
         document.getElementById("santimantcolor").style.backgroundColor = "red";
+        document.getElementById("remainingblocktext").innerHTML = "<div>Next bullrun will start at block:</div>";
+        document.getElementById("remainingblock").innerHTML = nextbullstart;
+        document.getElementById("remainingtimetext").innerHTML = "<div>Days till next bullrun:</div>";
+        document.getElementById("remainingtime").innerHTML = daytillnextbullstart;
     } else
 
     {
         document.getElementById("santimant").innerHTML = "<div>bullmarket</div>";
 
         document.getElementById("santimantcolor").style.backgroundColor = "green";
+
+        document.getElementById("remainingblocktext").innerHTML = "<div>Remaining blocks till end of bullrun:</div>";
+        document.getElementById("remainingblock").innerHTML = remainingblocktillendofbullrun;
+        document.getElementById("remainingtimetext").innerHTML = "<div>Days till end of bullrun:</div>";
+        document.getElementById("remainingtime").innerHTML = daytillendofbullrun;
 
     }
 
@@ -46,10 +67,10 @@ async function loadNames() {
     var data = [{
         domain: { x: [0, 1], y: [0, 1] },
         value: blocksincehalving + 70000,
-        title: { text: "Speed" },
+        title: { text: "Block Meter" },
         type: "indicator",
-        mode: "gauge+number",
-        delta: { reference: 400 },
+        mode: "gauge+number+delta",
+        delta: { reference: 140000, increasing: { color: "RebeccaPurple" } },
         gauge: {
             axis: { range: [0, 210000], tickwidth: 1, tickcolor: "darkblue" },
             bar: { color: "black" },
