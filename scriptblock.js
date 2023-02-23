@@ -3,6 +3,7 @@ async function loadNames() {
     const block = await response.json();
     //console.log(block.data.height);
     let latestblock = block.data.height;
+
     document.getElementById("ind1").innerHTML = latestblock;
 
     let nexthalving = 0;
@@ -17,47 +18,60 @@ async function loadNames() {
 
     let latesthalving = nexthalving - 210000;
 
-    let blocksincehalving = latestblock - latesthalving;
+    let blocksincehalving = latestblock - nexthalving;
 
     let bullstart = latesthalving - 70000;
     let bullend = latesthalving + 70000;
     let nextbullstart = nexthalving - 70000;
+    let nextbullend = nexthalving + 70000;
+
 
     let remainingblocktillnextbullstart = nextbullstart - latestblock;
     let daytillnextbullstart = (remainingblocktillnextbullstart * 10) / 1440;
 
-    let remainingblocktillendofbullrun = bullend - latestblock;
+    let remainingblocktillendofbullrun = nextbullend - latestblock;
     let daytillendofbullrun = (remainingblocktillendofbullrun * 10) / 1440;
+    let bullstartsince = ((latestblock - nextbullstart) * 10) / 1440;
+    let bearstartsince = ((latestblock - (latesthalving + 70000)) * 10) / 1440;
 
-    document.getElementById("bullstart").innerHTML = bullstart;
-    document.getElementById("bullend").innerHTML = bullend;
+    document.getElementById("bullstart").innerHTML = nextbullstart;
+    document.getElementById("bullend").innerHTML = nextbullend;
 
     document.getElementById("lasthalving").innerHTML = latesthalving;
 
     document.getElementById("nexthalving").innerHTML = nexthalving;
 
 
+    let gauge;
 
 
 
-    if (blocksincehalving + 70000 > 140000) {
+    if ((latestblock > latesthalving && latestblock < latesthalving + 70000) || (latestblock > nextbullstart && latestblock < nexthalving)) {
+
+        document.getElementById("santimant").innerHTML = "<div>bullmarket</div>";
+        document.getElementById("santimantcolor").style.backgroundColor = "green";
+        document.getElementById("remainingblocktext").innerHTML = "<div>Remaining blocks till end of bullrun:</div>";
+        document.getElementById("remainingblock").innerHTML = remainingblocktillendofbullrun;
+        document.getElementById("remainingtimetext").innerHTML = "<div>Days until end of bullrun:</div>";
+        document.getElementById("remainingtime").innerHTML = daytillendofbullrun;
+        document.getElementById("bullstartsincetext").innerHTML = "<div>Days since start of bullrun:</div>";
+        document.getElementById("bullstartsince").innerHTML = bullstartsince;
+        gauge = blocksincehalving + 70000;
+
+    } else
+
+    {
+
+
         document.getElementById("santimant").innerHTML = "<div>bearmarket</div>";
         document.getElementById("santimantcolor").style.backgroundColor = "red";
         document.getElementById("remainingblocktext").innerHTML = "<div>Next bullrun will start at block:</div>";
         document.getElementById("remainingblock").innerHTML = nextbullstart;
-        document.getElementById("remainingtimetext").innerHTML = "<div>Days till next bullrun:</div>";
+        document.getElementById("remainingtimetext").innerHTML = "<div>Days until next bullrun:</div>";
         document.getElementById("remainingtime").innerHTML = daytillnextbullstart;
-    } else
-
-    {
-        document.getElementById("santimant").innerHTML = "<div>bullmarket</div>";
-
-        document.getElementById("santimantcolor").style.backgroundColor = "green";
-
-        document.getElementById("remainingblocktext").innerHTML = "<div>Remaining blocks till end of bullrun:</div>";
-        document.getElementById("remainingblock").innerHTML = remainingblocktillendofbullrun;
-        document.getElementById("remainingtimetext").innerHTML = "<div>Days till end of bullrun:</div>";
-        document.getElementById("remainingtime").innerHTML = daytillendofbullrun;
+        document.getElementById("bullstartsincetext").innerHTML = "<div>Days since start of bearmarket:</div>";
+        document.getElementById("bullstartsince").innerHTML = bearstartsince;
+        gauge = latestblock - latesthalving + 70000;
 
     }
 
@@ -66,7 +80,7 @@ async function loadNames() {
 
     var data = [{
         domain: { x: [0, 1], y: [0, 1] },
-        value: blocksincehalving + 70000,
+        value: gauge,
         title: { text: "Block Meter" },
         type: "indicator",
         mode: "gauge+number+delta",
