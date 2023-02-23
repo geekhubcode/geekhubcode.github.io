@@ -1,0 +1,201 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: "IBM Plex Mono";
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 40px 0 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+        }
+        
+        th,
+        td {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Token Information</h1>
+    <table>
+        <tr>
+
+            <th>Token</th>
+            <th>Symbol</th>
+            <th>Price (USD)</th>
+            <th>Circulating Supply</th>
+            <th>Total Supply</th>
+            <th>Market cap</th>
+            <th>Rank</th>
+            <th>Price on January 1, 2023</th>
+            <th>Gain/Loss</th>
+
+        </tr>
+        <tbody id="token-table"></tbody>
+    </table>
+    <script>
+        $(document).ready(function() {
+            var tokens = ["bitcoin", "ethereum", "binancecoin", "ultra", "dusk-network", "solana", "audius", "avalanche-2", "aave", "senso", "matic-network", "curve-dao-token", "moonbeam", "api3", "multichain", "livepeer", "axelar", "cosmos", "telcoin", "mina-protocol", "parsiq", "xdefi", "streamr", "blackpool-token", "paraswap", "apwine", "angle-protocol", "sunflower-land", "mimo-parallel-governance-token"];
+
+
+            var values = {
+                "bitcoin": 16540,
+                "ethereum": 1196,
+                "binancecoin": 246,
+                "ultra": 0.180,
+                "dusk-network": 0.082,
+                "solana": 9.96,
+                "audius": 0.127,
+                "avalanche-2": 10.8,
+                "aave": 51.9,
+                "senso": 0.138,
+                "matic-network": 0.759,
+                "curve-dao-token": 0.524,
+                "moonbeam": 0.330,
+                "api3": 1.01,
+                "multichain": 4.44,
+                "livepeer": 4.54,
+                "axelar": 0.511,
+                "cosmos": 9.35,
+                "telcoin": 0.0019,
+                "mina-protocol": 0.434,
+                "parsiq": 0.082,
+                "xdefi": 0.0887,
+                "streamr": 0.022,
+                "blackpool-token": 0.251,
+                "paraswap": 0.0294,
+                "apwine": 0.190,
+                "angle-protocol": 0.0259,
+                "sunflower-land": 0.098,
+                "mimo-parallel-governance-token": 0.0123
+            };
+
+
+            var realtime_price;
+
+            // Call CoinGecko API for each token
+            $.each(tokens, function(index, token) {
+
+                $.getJSON("https://api.coingecko.com/api/v3/coins/" + token + "?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false", function(data) {
+
+
+
+
+                    // Create a new row for the table
+                    var row = $("<tr>");
+
+
+
+
+                    // Add the name of the token
+                    var name = $("<td>").text(data.name);
+                    row.append(name);
+
+
+
+                    // Add the symbol of the token
+                    var symbol = $("<td>").text(data.symbol);
+                    row.append(symbol);
+
+
+
+                    // Add the price of the token in USD
+                    var price = $("<td>").text("$" + data.market_data.current_price.usd);
+
+                    realtime_price = data.market_data.current_price.usd;
+                    row.append(price);
+
+                    // Add the circulating supply of the token
+                    var supply = $("<td>").text(data.market_data.circulating_supply.toFixed(0) + " " + data.symbol);
+
+                    row.append(supply);
+
+                    // Add the total supply of the token
+                    var totalSupply = $("<td>").text(data.market_data.total_supply.toFixed(0) + " " + data.symbol);
+                    row.append(totalSupply);
+
+                    // Add the market cap of the token
+                    var marketCap = $("<td>").text("$" + (data.market_data.current_price.usd * data.market_data.circulating_supply).toFixed(0));
+                    row.append(marketCap);
+
+
+                    // Add the ranking of the token
+                    var rank = $("<td>").text(data.market_data.market_cap_rank);
+                    row.append(rank);
+
+
+
+
+                    ////valeur au 1ER janvier 2023
+
+                    var value = $("<td>").text("$" + values[token]);
+                    row.append(value);
+
+                    // gain/loss pourcentage
+
+                    // Calculer le gain / perte en utilisant la formule (prix actuel - valeur précédente) / valeur précédente
+                    var gainLossPercent = ((realtime_price - values[token]) / values[token] * 100).toFixed(1);
+                    var gainLoss = ($("<td>").text(gainLossPercent + "%"));
+
+                    // Vérifier si le gain / perte est positif ou négatif
+                    if ((realtime_price - values[token]) / values[token] * 100 >= 0) {
+                        // Si positif, définir la couleur en vert
+                        gainLoss.css("color", "green");
+                    } else {
+                        // Sinon, définir la couleur en rouge
+                        gainLoss.css("color", "red");
+                    }
+
+                    // Ajouter le gain / perte à la ligne
+                    row.append(gainLoss);
+
+
+
+
+
+
+                    // Add the row to the table
+                    $("#token-table").append(row);
+
+                    // Trier les lignes de la table en fonction du marketcap
+                    $("#token-table").find("tr").sort(function(a, b) {
+                        var marketCapA = parseFloat($(a).find("td:eq(5)").text().replace("$", ""));
+                        var marketCapB = parseFloat($(b).find("td:eq(5)").text().replace("$", ""));
+                        return marketCapB - marketCapA;
+                    }).appendTo("#token-table");
+
+
+
+
+
+
+
+
+
+
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

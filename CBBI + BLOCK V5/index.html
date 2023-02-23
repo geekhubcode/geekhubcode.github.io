@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CBBI - ColinTalksCrypto Bitcoin Bull Run Index - BTC Price Evaluation</title>
+    <meta name="description" content="Colin Talks Crypto Bitcoin Bull Run Index (CBBI) uses multiple metrics to evaluate the confidence that we are at the price peak of the current Bitcoin bull run.">
+
+    <meta property="og:title" content="CBBI - Colin Talks Crypto Bitcoin Bull Run Index - BTC Price Evaluation">
+    <meta property="og:description" content="Colin Talks Crypto Bitcoin Bull Run Index (CBBI) uses multiple metrics to evaluate the confidence that we are at the price peak of the current Bitcoin bull run.">
+    <meta name="twitter:title" content="CBBI - Colin Talks Crypto Bitcoin Bull Run Index - BTC Price Evaluation">
+    <meta name="twitter:description" content="Colin Talks Crypto Bitcoin Bull Run Index (CBBI) uses multiple metrics to evaluate the confidence that we are at the price peak of the current Bitcoin bull run.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://colintalkscrypto.com/cbbi/">
+    <meta property="og:image" content="https://colintalkscrypto.com/cbbi/img/v2/logo_og.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="colintalkscrypto.com">
+    <meta property="twitter:url" content="https://colintalkscrypto.com/cbbi/">
+    <meta name="twitter:image" content="https://colintalkscrypto.com/cbbi/img/v2/logo_og.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#ee922f">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preload" href="js/jquery-3.6.0.slim.min.js" as="script" type="text/javascript">
+    <link rel="preload" href="js/bootstrap.bundle.min.js" as="script" type="text/javascript">
+    <link rel="preload" href="js/highstock.js" as="script" type="text/javascript">
+    <link rel="preload" href="js/modules/data.js" as="script" type="text/javascript">
+    <link rel="preload" href="js/modules/annotations-advanced.js" as="script" type="text/javascript">
+    <link rel="preload" href="js/moment.min.js" as="script" type="text/javascript">
+    <link rel="preload" href="js/script.js" as="script" type="text/javascript">
+    <link rel="preload" href="js/scriptindicator.js" as="script" type="text/javascript">
+
+
+
+
+    <link rel="preload" href="css/all.min.css" as="style" type="text/css">
+
+    <link rel='stylesheet' id='bcc-css' href='stylerainbow/styles.css?id=5&#038;ver=5.8.2' type='text/css' media='all' />
+
+    <script>
+        let _paq = window._paq = window._paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            let u = "https://matomo.monicz.pl/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '3']);
+            let d = document,
+                g = d.createElement('script'),
+                s = d.getElementsByTagName('script')[0];
+            g.async = true;
+            g.src = u + 'matomo.js';
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+
+    <style>
+        @font-face {
+            font-family: 'Bahnschrift';
+            src: url('font/hinted-subset-Bahnschrift.woff2') format('woff2'), url('font/hinted-subset-Bahnschrift.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+000-5FF;
+        }
+        
+        @font-face {
+            font-family: 'Lato-Light';
+            src: local('Lato-Light'), url('font/hinted-subset-Lato-Light.woff2') format('woff2'), url('font/hinted-subset-Lato-Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+000-5FF;
+        }
+        
+        @font-face {
+            font-family: 'Montserrat-Regular';
+            src: local('Montserrat Regular'), local('Montserrat-Regular'), url('font/hinted-subset-Montserrat-Regular.woff2') format('woff2'), url('font/hinted-subset-Montserrat-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+000-5FF;
+        }
+        
+        @font-face {
+            font-family: 'IBM Plex Mono';
+            font-style: normal;
+            font-weight: 400;
+            src: url('../fonts/ibm-plex-mono-v11-latin-regular.eot');
+            /* IE9 Compat Modes */
+            src: local(''), url('../fonts/ibm-plex-mono-v11-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('../fonts/ibm-plex-mono-v11-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+            url('../fonts/ibm-plex-mono-v11-latin-regular.woff') format('woff'), /* Modern Browsers */
+            url('../fonts/ibm-plex-mono-v11-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+            url('../fonts/ibm-plex-mono-v11-latin-regular.svg#IBMPlexMono') format('svg');
+            /* Legacy iOS */
+        }
+    </style>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="./styleblock.css">
+</head>
+
+<body>
+
+    <div class="cat">
+        <img src="/img/stonk.gif" width="300" height="386"></img>
+    </div>
+
+
+
+    <!--BLOCK-->
+
+    <div class="boxborder">
+
+        <!-- partial:index.partial.html -->
+        <div class="blockindicator">
+
+            <div>
+
+                <head>
+                    <!-- Load plotly.js into the DOM -->
+                    <script src='https://cdn.plot.ly/plotly-2.9.0.min.js'></script>
+                </head>
+
+                <body>
+                    <div id='myDiv'>
+                        <!-- Plotly chart will be drawn inside this DIV -->
+                    </div>
+
+
+            </div>
+
+            <div class="blockinfo">
+
+                <div class="blocktext">Latest block is number:<span id="ind1"> </span></div>
+
+                <div class="blocktext" id="green">Bullrun start at block:<span class="blocktext" id="bullstart"></span></div>
+                <div class="blocktext" id="red">Bullrun end at block:<span id="bullend"> </span></div>
+                <div class="blocktext">Last halving was at block:<span class="blocktext" id="lasthalving"></span></div>
+                <div class="blocktext">Next halving is at block:<span id="nexthalving"></span></div>
+
+
+            </div>
+
+            <div class="blockinfo2" id="santimantcolor">
+
+                <div class="blocktext"><span class="blocksantimant" id="santimant"></span>
+
+                    <span class="blocksantimant" id="remainingblocktext"></span><span class="blocksantimant" id="remainingblock"></span>
+                    <span class="blocksantimant" id="remainingtimetext"></span><span class="blocksantimant" id="remainingtime"></span>
+                    <span class="blocksantimant" id="bullstartsincetext"></span><span class="blocksantimant" id="bullstartsince"></span>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <!--TOKENS-->
+
+
+    <iframe src="tokens.html" width="100%" height="1400"></iframe>
+
+
+
+    <!--CBBI-->
+
+
+    <div class="boxborder">
+
+
+
+        <div id="loading" class="spinner-border text-light"></div>
+
+        <div class="header">
+
+            <div class="container">
+
+                <div class="confidence-score">
+                    <p class="note">CONFIDENCE WE ARE AT THE PEAK:</p>
+                    <h1 class="title confidence-score-value">--</h1>
+                    <h2 class="subtitle" data-timestamp>- - -</h2>
+                    <p class="metrics-disabled-alert d-none" data-toggle="tooltip" title="The score is showing only composite of the selected metrics. Toggle on all metrics (below) to see the normal CBBI score.">
+                        <i class="fas fa-info-circle mr-2"></i><span>Some metrics are disabled.</span>
+                    </p>
+                    <p class="credits">CBBI.info</p>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="metrics-wrapper">
+            <div class="metrics">
+                <div class="metric">
+                    <a href="https://www.lookintobitcoin.com/charts/pi-cycle-top-indicator/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span id="indicator1000" data-index-name="PiCycle">--</span>%</h4>
+                        <p class="name">Pi Cycle Top<br>Indicator</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="PiCycle" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://www.lookintobitcoin.com/charts/relative-unrealized-profit--loss/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="RUPL">--</span>%</h4>
+                        <p class="name">RUPL / NUPL<br>Chart</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="RUPL" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://www.lookintobitcoin.com/charts/rhodl-ratio/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="RHODL">--</span>%</h4>
+                        <p class="name">RHODL<br>Ratio</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="RHODL" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://www.lookintobitcoin.com/charts/puell-multiple/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="Puell">--</span>%</h4>
+                        <p class="name">Puell<br>Multiple</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="Puell" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://www.lookintobitcoin.com/charts/bitcoin-investor-tool/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="2YMA">--</span>%</h4>
+                        <p class="name">2 Year<br>Moving Average</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="2YMA" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://www.blockchaincenter.net/bitcoin-rainbow-chart/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="Trolololo">--</span>%</h4>
+                        <p class="name">Bitcoin Trolololo<br>Trend Line</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="Trolololo" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://www.lookintobitcoin.com/charts/mvrv-zscore/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="MVRV">--</span>%</h4>
+                        <p class="name">MVRV<br>Z-Score</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="MVRV" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://www.lookintobitcoin.com/charts/reserve-risk/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="ReserveRisk">--</span>%</h4>
+                        <p class="name">Reserve<br>Risk</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="ReserveRisk" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://charts.woobull.com/bitcoin-price-models/" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="Woobull">--</span>%</h4>
+                        <p class="name">Woobull<br>Top Cap vs CVDD</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="Woobull" checked>
+                    </div>
+                </div>
+                <div class="metric">
+                    <a href="https://trends.google.com/trends/explore?date=today%205-y&q=bitcoin" target="_blank" rel="noreferrer">
+                        <h4 class="score"><span data-index-name="GoogleTrends">--</span>%</h4>
+                        <p class="name">"Bitcoin" search<br>term (Google)</p>
+                    </a>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" title="Use this metric during the CBBI calculation" data-include-index-name="GoogleTrends" checked>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="metrics-extra">
+            <button class="toggle-all">Toggle all metrics</button>
+        </div>
+
+        <div class="chart-wrapper container">
+            <div id="chart"></div>
+        </div>
+
+        <div class="chart-description container">
+            <p>
+                The <span class="rainbow">CBBI Rainbow Line</span> displays the Bitcoin price line using the CBBI score for the color of each point.
+            </p>
+
+            <div class="gradient-wrapper">
+                <div class="gradient-box">
+                    <div class="gradient"></div>
+                    <div class="gradient-text">
+                        <div>0&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        <div>50</div>
+                        <div>100</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+    </div>
+    </div>
+
+    <script src="js/jquery-3.6.0.slim.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="js/highstock.js" type="text/javascript"></script>
+    <script src="js/modules/data.js" type="text/javascript"></script>
+    <script src="js/modules/annotations-advanced.js" type="text/javascript"></script>
+    <script src="js/moment.min.js" type="text/javascript"></script>
+    <script src="js/script.js" type="text/javascript"></script>
+    <script src="js/scriptindicator.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="/fearandgreed/index.css">
+
+    </div>
+
+    <!--FEAR-->
+
+    <div class="boxborder" style="text-align: center">
+
+
+        <img src="https://alternative.me/crypto/fear-and-greed-index.png" alt="Latest Crypto Fear & Greed Index" />
+
+
+    </div>
+
+
+
+
+
+    </div>
+    </body>
+    <!-- partial -->
+    <script src="./scriptblock.js"></script>

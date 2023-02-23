@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Crypto Fear &amp; Greed Index - Bitcoin Sentiment - Alternative.me</title>
+
+
+
+    <style type="text/css">
+        svg:not(:root).svg-inline--fa {
+            overflow: visible;
+        }
+        
+        .svg-inline--fa {
+            display: inline-block;
+            font-size: inherit;
+            height: 1em;
+            overflow: visible;
+            vertical-align: -0.125em;
+        }
+        
+        .svg-inline--fa.fa-lg {
+            vertical-align: -0.225em;
+        }
+        
+        .svg-inline--fa.fa-w-1 {
+            width: 0.0625em;
+        }
+        
+        .svg-inline--fa.fa-w-2 {
+            width: 0.125em;
+        }
+        
+        .svg-inline--fa.fa-w-3 {
+            width: 0.1875em;
+        }
+        
+        .svg-inline--fa.fa-w-4 {
+            width: 0.25em;
+        }
+        
+        .svg-inline--fa.fa-w-5 {
+            width: 0.3125em;
+        }
+        
+        .svg-inline--fa.fa-w-6 {
+            width: 0.375em;
+        }
+        
+        .svg-inline--fa.fa-w-7 {
+            width: 0.4375em;
+        }
+        
+        .svg-inline--fa.fa-w-8 {
+            width: 0.5em;
+        }
+        
+        .svg-inline--fa.fa-w-9 {
+            width: 0.5625em;
+        }
+        
+        .svg-inline--fa.fa-w-10 {
+            width: 0.625em;
+        }
+        
+        .svg-inline--fa.fa-w-11 {
+            width: 0.6875em;
+        }
+        
+        .svg-inline--fa.fa-w-12 {
+            width: 0.75em;
+        }
+        
+        .svg-inline--fa.fa-w-13 {
+            width: 0.8125em;
+        }
+        
+        .svg-inline--fa.fa-w-14 {
+            width: 0.875em;
+        }
+        
+        .svg-inline--fa.fa-w-15 {
+            width: 0.9375em;
+        }
+        
+        .svg-inline--fa.fa-w-16 {
+            width: 1em;
+        }
+        
+        .svg-inline--fa.fa-w-17 {
+            width: 1.0625em;
+        }
+        
+        .svg-inline--fa.fa-w-18 {
+            width: 1.125em;
+        }
+        
+        .svg-inline--fa.fa-w-19 {
+            width: 1.1875em;
+        }
+        
+        .svg-inline--fa.fa-w-20 {
+            width: 1.25em;
+        }
+        
+        .svg-inline--fa.fa-pull-left {
+            margin-right: 0.3em;
+            width: auto;
+        }
+        
+        .svg-inline--fa.fa-pull-right {
+            margin-left: 0.3em;
+            width: auto;
+        }
+        
+        .svg-inline--fa.fa-border {
+            height: 1.5em;
+        }
+        
+        .svg-inline--fa.fa-li {
+            width: 2em;
+        }
+        
+        .svg-inline--fa.fa-fw {
+            width: 1.25em;
+        }
+        
+        .fa-layers svg.svg-inline--fa {
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        
+        .fa-layers {
+            display: inline-block;
+            height: 1em;
+            position: relative;
+            text-align: center;
+            vertical-align: -0.125em;
+            width: 1em;
+        }
+        
+        .fa-layers svg.svg-inline--fa {
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+        }
+        
+        .fa-layers-counter,
+        .fa-layers-text {
+            display: inline-block;
+            position: absolute;
+            text-align: center;
+        }
+        
+        .fa-layers-text {
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+        }
+        
+        .fa-layers-counter {
+            background-color: #ff253a;
+            border-radius: 1em;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #fff;
+            height: 1.5em;
+            line-height: 1;
+            max-width: 5em;
+            min-width: 1.5em;
+            overflow: hidden;
+            padding: 0.25em;
+            right: 0;
+            text-overflow: ellipsis;
+            top: 0;
+            -webkit-transform: scale(0.25);
+            transform: scale(0.25);
+            -webkit-transform-origin: top right;
+            transform-origin: top right;
+        }
+        
+        .fa-layers-bottom-right {
+            bottom: 0;
+            right: 0;
+            top: auto;
+            -webkit-transform: scale(0.25);
+            transform: scale(0.25);
+            -webkit-transform-origin: bottom right;
+            transform-origin: bottom right;
+        }
+        
+        .fa-layers-bottom-left {
+            bottom: 0;
+            left: 0;
+            right: auto;
+            top: auto;
+            -webkit-transform: scale(0.25);
+            transform: scale(0.25);
+            -webkit-transform-origin: bottom left;
+            transform-origin: bottom left;
+        }
+        
+        .fa-layers-top-right {
+            right: 0;
+            top: 0;
+            -webkit-transform: scale(0.25);
+            transform: scale(0.25);
+            -webkit-transform-origin: top right;
+            transform-origin: top right;
+        }
+        
+        .fa-layers-top-left {
+            left: 0;
+            right: auto;
+            top: 0;
+            -webkit-transform: scale(0.25);
+            transform: scale(0.25);
+            -webkit-transform-origin: top left;
+            transform-origin: top left;
+        }
+        
+        .fa-lg {
+            font-size: 1.3333333333em;
+            line-height: 0.75em;
+            vertical-align: -0.0667em;
+        }
+        
+        .fa-xs {
+            font-size: 0.75em;
+        }
+        
+        .fa-sm {
+            font-size: 0.875em;
+        }
+        
+        .fa-1x {
+            font-size: 1em;
+        }
+        
+        .fa-2x {
+            font-size: 2em;
+        }
+        
+        .fa-3x {
+            font-size: 3em;
+        }
+        
+        .fa-4x {
+            font-size: 4em;
+        }
+        
+        .fa-5x {
+            font-size: 5em;
+        }
+        
+        .fa-6x {
+            font-size: 6em;
+        }
+        
+        .fa-7x {
+            font-size: 7em;
+        }
+        
+        .fa-8x {
+            font-size: 8em;
+        }
+        
+        .fa-9x {
+            font-size: 9em;
+        }
+        
+        .fa-10x {
+            font-size: 10em;
+        }
+        
+        .fa-fw {
+            text-align: center;
+            width: 1.25em;
+        }
+        
+        .fa-ul {
+            list-style-type: none;
+            margin-left: 2.5em;
+            padding-left: 0;
+        }
+        
+        .fa-ul>li {
+            position: relative;
+        }
+        
+        .fa-li {
+            left: -2em;
+            position: absolute;
+            text-align: center;
+            width: 2em;
+            line-height: inherit;
+        }
+        
+        .fa-border {
+            border: solid 0.08em #eee;
+            border-radius: 0.1em;
+            padding: 0.2em 0.25em 0.15em;
+        }
+        
+        .fa-pull-left {
+            float: left;
+        }
+        
+        .fa-pull-right {
+            float: right;
+        }
+        
+        .fa.fa-pull-left,
+        .fas.fa-pull-left,
+        .far.fa-pull-left,
+        .fal.fa-pull-left,
+        .fab.fa-pull-left {
+            margin-right: 0.3em;
+        }
+        
+        .fa.fa-pull-right,
+        .fas.fa-pull-right,
+        .far.fa-pull-right,
+        .fal.fa-pull-right,
+        .fab.fa-pull-right {
+            margin-left: 0.3em;
+        }
+        
+        .fa-spin {
+            -webkit-animation: fa-spin 2s infinite linear;
+            animation: fa-spin 2s infinite linear;
+        }
+        
+        .fa-pulse {
+            -webkit-animation: fa-spin 1s infinite steps(8);
+            animation: fa-spin 1s infinite steps(8);
+        }
+        
+        @-webkit-keyframes fa-spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes fa-spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        
+        .fa-rotate-90 {
+            -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+        
+        .fa-rotate-180 {
+            -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        
+        .fa-rotate-270 {
+            -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+            -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+        
+        .fa-flip-horizontal {
+            -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+            -webkit-transform: scale(-1, 1);
+            transform: scale(-1, 1);
+        }
+        
+        .fa-flip-vertical {
+            -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+            -webkit-transform: scale(1, -1);
+            transform: scale(1, -1);
+        }
+        
+        .fa-flip-both,
+        .fa-flip-horizontal.fa-flip-vertical {
+            -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+            -webkit-transform: scale(-1, -1);
+            transform: scale(-1, -1);
+        }
+        
+         :root .fa-rotate-90,
+         :root .fa-rotate-180,
+         :root .fa-rotate-270,
+         :root .fa-flip-horizontal,
+         :root .fa-flip-vertical,
+         :root .fa-flip-both {
+            -webkit-filter: none;
+            filter: none;
+        }
+        
+        .fa-stack {
+            display: inline-block;
+            height: 2em;
+            position: relative;
+            width: 2.5em;
+        }
+        
+        .fa-stack-1x,
+        .fa-stack-2x {
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        
+        .svg-inline--fa.fa-stack-1x {
+            height: 1em;
+            width: 1.25em;
+        }
+        
+        .svg-inline--fa.fa-stack-2x {
+            height: 2em;
+            width: 2.5em;
+        }
+        
+        .fa-inverse {
+            color: #fff;
+        }
+        
+        .sr-only {
+            border: 0;
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        
+        .sr-only-focusable:active,
+        .sr-only-focusable:focus {
+            clip: auto;
+            height: auto;
+            margin: 0;
+            overflow: visible;
+            position: static;
+            width: auto;
+        }
+        
+        .svg-inline--fa .fa-primary {
+            fill: var(--fa-primary-color, currentColor);
+            opacity: 1;
+            opacity: var(--fa-primary-opacity, 1);
+        }
+        
+        .svg-inline--fa .fa-secondary {
+            fill: var(--fa-secondary-color, currentColor);
+            opacity: 0.4;
+            opacity: var(--fa-secondary-opacity, 0.4);
+        }
+        
+        .svg-inline--fa.fa-swap-opacity .fa-primary {
+            opacity: 0.4;
+            opacity: var(--fa-secondary-opacity, 0.4);
+        }
+        
+        .svg-inline--fa.fa-swap-opacity .fa-secondary {
+            opacity: 1;
+            opacity: var(--fa-primary-opacity, 1);
+        }
+        
+        .svg-inline--fa mask .fa-primary,
+        .svg-inline--fa mask .fa-secondary {
+            fill: black;
+        }
+        
+        .fad.fa-inverse {
+            color: #fff;
+        }
+    </style>
+    <link rel="stylesheet" href="/fearandgreed/index.css">
+
+    <meta name="description" content="The crypto fear &amp; greed index of alternative.me provides an easy overview of the current sentiment of the Bitcoin / crypto market at a glance.">
+
+
+    <link rel="canonical" href="https://alternative.me/crypto/fear-and-greed-index/">
+
+
+    <meta name="referrer" content="unsafe-url">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <meta property="og:title" content="Crypto Fear &amp; Greed Index - Bitcoin Sentiment">
+    <meta property="og:description" content="The crypto fear &amp; greed index of alternative.me provides an easy overview of the current sentiment of the Bitcoin / crypto market at a glance.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alternative.me/crypto/fear-and-greed-index/">
+    <meta property="og:image" content="https://alternative.me/crypto/fear-and-greed-index.png">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <style type="text/css">
+        /* Chart.js */
+        /*
+ * DOM element rendering detection
+ * https://davidwalsh.name/detect-node-insertion
+ */
+        
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 0.001s;
+        }
+        /*
+ * DOM element resizing detection
+ * https://github.com/marcj/css-element-queries
+ */
+        
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1;
+        }
+        
+        .chartjs-size-monitor-expand>div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0;
+        }
+        
+        .chartjs-size-monitor-shrink>div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+    <div id="wrapper">
+
+
+        <main id="main">
+            <section class="section">
+                <div class="container">
+
+                    <div class="fear">
+
+                        <div class="columns">
+                            <div class="column is-one-third">
+                                <div class="box" style="padding: 0px !important;">
+                                    <a href="/crypto/fear-and-greed-index/"><img src="https://alternative.me/crypto/fear-and-greed-index.png" alt="Bitcoin Fear &amp; Greed Index" style="border-radius: 6px; vertical-align: bottom;"></a>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <h2 class="title is-4">Historical Values</h2>
+                                    <div class="block">
+                                        <div class="fng-value">
+                                            <div>
+                                                <div class="gray">Now</div>
+                                                <div class="status" style="color: rgb(227, 157, 100);">Fear</div>
+                                            </div>
+                                            <div>
+                                                <div class="fng-circle" style="background-color: rgb(227, 157, 100); padding: 13px 8px;">30</div>
+                                            </div>
+                                        </div>
+                                        <div class="fng-value">
+                                            <div>
+                                                <div class="gray">Yesterday</div>
+                                                <div class="status" style="color: rgb(227, 157, 100);">Fear</div>
+                                            </div>
+                                            <div>
+                                                <div class="fng-circle" style="background-color: rgb(227, 157, 100); padding: 13px 8px;">31</div>
+                                            </div>
+                                        </div>
+                                        <div class="fng-value">
+                                            <div>
+                                                <div class="gray">Last week</div>
+                                                <div class="status" style="color: rgb(209, 115, 57);">Extreme Fear</div>
+                                            </div>
+                                            <div>
+                                                <div class="fng-circle" style="background-color: rgb(209, 115, 57); padding: 13px 8px;">23</div>
+                                            </div>
+                                        </div>
+                                        <div class="fng-value last">
+                                            <div>
+                                                <div class="gray">Last month</div>
+                                                <div class="status" style="color: rgb(209, 115, 57);">Extreme Fear</div>
+                                            </div>
+                                            <div>
+                                                <div class="fng-circle" style="background-color: rgb(209, 115, 57); padding: 13px 8px;">25</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <h2 class="title is-4">Next Update</h2>
+                                    <div class="fng-countdown">
+                                        <div>
+                                            <div class="field has-text-centered has-text-weight-bold">The next update will happen in:</div>
+                                            <div class="has-text-centered"><span>6 hours, 8 minutes, 7 seconds.</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- JS -->
+                    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+                    <script src="/index.js?v=3"></script>
+
+
+
+
+
+                    <script>
+                        new Vue({
+                            el: '#header',
+                            data() {
+                                return {
+                                    NavbarMenuisOpen: false
+                                }
+                            }
+                        });
+                    </script>
+
+                    <script>
+                        new Vue({
+                            el: '#footer',
+                            data() {
+                                return {
+                                    cookieAccepted: false
+                                }
+                            },
+                            mounted() {
+                                if (document.cookie.indexOf('cookie_consent') > -1) {
+                                    this.cookieAccepted = true
+                                }
+                            },
+                            methods: {
+                                acceptCookie() {
+                                    $cookies.set('cookie_consent', 1)
+                                    this.cookieAccepted = true
+                                }
+                            }
+                        });
+                    </script>
+
+                    <script type="text/javascript">
+                        var gaProperty = 'UA-134165592-1';
+                        var disableStr = 'ga-disable-' + gaProperty;
+                        if (document.cookie.indexOf(disableStr + '=true') > -1) {
+                            window[disableStr] = true;
+                        }
+
+                        function gaOptout() {
+                            document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+                            window[disableStr] = true;
+                        }
+                    </script>
+
+                    <!-- Global site tag (gtag.js) - Google Analytics -->
+                    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-134165592-1"></script>
+                    <script>
+                        window.dataLayer = window.dataLayer || [];
+
+                        function gtag() {
+                            dataLayer.push(arguments);
+                        }
+                        gtag('js', new Date());
+
+                        gtag('config', 'UA-134165592-1', {
+                            'anonymize_ip': true
+                        });
+                    </script>
+
+
+                    <script>
+                        Vue.component('fng-chart', {
+                            extends: LineChart,
+                            props: ['days'],
+                            data() {
+                                return {
+                                    data: null,
+                                    options: {
+                                        maintainAspectRatio: false,
+                                        responsive: true,
+                                        tooltips: {
+                                            mode: 'index',
+                                            intersect: false,
+                                        },
+                                        hover: {
+                                            mode: 'nearest',
+                                            intersect: true
+                                        },
+                                        scales: {
+                                            xAxes: [{
+                                                display: true,
+                                                scaleLabel: {
+                                                    display: false,
+                                                    labelString: 'Day'
+                                                }
+                                            }],
+                                            yAxes: [{
+                                                display: true,
+                                                scaleLabel: {
+                                                    display: true,
+                                                    labelString: 'Value'
+                                                },
+                                                ticks: {
+                                                    beginAtZero: true,
+                                                    steps: 10,
+                                                    stepValue: 5,
+                                                    max: 100
+                                                }
+                                            }]
+                                        }
+                                    }
+                                }
+                            },
+                            mounted() {
+                                this.getFearAndGreedHistory()
+                            },
+                            watch: {
+                                days() {
+                                    this.getFearAndGreedHistory()
+                                }
+                            },
+                            methods: {
+                                async getFearAndGreedHistory() {
+                                    try {
+                                        const {
+                                            data
+                                        } = await this.axios.post('/crypto/fear-and-greed-index/history', {
+                                            days: this.days
+                                        })
+
+                                        if (data.success) {
+                                            this.renderChart(data.data, this.options)
+                                        }
+                                    } catch (e) {
+                                        console.log(e)
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+
+
+                    <script>
+                        new Vue({
+                            el: '#main',
+                            data() {
+                                return {
+                                    fngHistoryDays: 30,
+                                    widgetData: '',
+                                    showSteps: false,
+                                }
+                            },
+                            mounted() {
+                                const promise = this.getWidgetFile()
+                            },
+                            methods: {
+                                toastCopied() {
+                                    this.$buefy.toast.open({
+                                        duration: 2000,
+                                        message: 'Copied to clipboard',
+                                        type: 'is-success'
+                                    })
+                                },
+
+                                async getWidgetFile() {
+
+                                    this.axios.get('/widget/fng_ios_widget.js', {
+                                            baseURL: ''
+                                        })
+                                        .then((response) => {
+                                            // console.log(response)
+                                            this.widgetData = response.data
+                                        });
+
+                                },
+                            }
+                        });
+                    </script>
+
+                    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                    <script>
+                        // Top Responsive
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+
+                        // More Responsive
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+
+
+
+
+
+</body>
+
+</html>

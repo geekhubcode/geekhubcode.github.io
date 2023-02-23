@@ -1,0 +1,28 @@
+.blocktext {
+    font-family: "IBM Plex Mono";
+    Padding: 3px;
+}
+
+.blockinfo {
+    margin: auto;
+    justify-content: center;
+    padding: 30px;
+}
+
+.blockinfo2 {
+    margin: auto;
+    padding: 30px;
+}
+
+.blockindicator {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#green {
+    color: green;
+}
+
+#red {
+    color: #ff0000;
+}
