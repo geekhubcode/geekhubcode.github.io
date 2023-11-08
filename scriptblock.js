@@ -1,8 +1,8 @@
 async function loadNames() {
-    const response = await fetch('https://chain.api.btc.com/v3/block/latest');
+    const response = await fetch('https://api.blockchair.com/bitcoin/stats');
     const block = await response.json();
     //console.log(block.data.height);
-    let latestblock = block.data.height;
+    let latestblock = block.data.blocks;
 
     document.getElementById("ind1").innerHTML = latestblock;
 
