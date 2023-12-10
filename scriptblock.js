@@ -30,9 +30,20 @@ async function loadNames() {
     let daytillnextbullstart = (remainingblocktillnextbullstart * 10) / 1440;
 
     let remainingblocktillendofbullrun = nextbullend - latestblock;
+    let remainingblocktillnexthalving = nexthalving - latestblock;
     let daytillendofbullrun = (remainingblocktillendofbullrun * 10) / 1440;
     let bullstartsince = ((latestblock - nextbullstart) * 10) / 1440;
     let bearstartsince = ((latestblock - (latesthalving + 70000)) * 10) / 1440;
+
+    let daystillnexthalving = (remainingblocktillnexthalving * 10) / 1440;
+
+    let daystillstopdcain = ((remainingblocktillnexthalving + 8640) * 10) / 1440;
+
+
+    let daystillstartdcaout = ((remainingblocktillnexthalving + 35000 + 8640) * 10) / 1440;
+
+
+    document.getElementById("numberdaystillnexthalving").innerHTML = daystillnexthalving;
 
     document.getElementById("bullstart").innerHTML = nextbullstart;
     document.getElementById("bullend").innerHTML = nextbullend;
@@ -40,6 +51,14 @@ async function loadNames() {
     document.getElementById("lasthalving").innerHTML = latesthalving;
 
     document.getElementById("nexthalving").innerHTML = nexthalving;
+
+
+    document.getElementById("halvingdate").innerHTML = new Date(calculerDateEvenement(daystillnexthalving)).toISOString().split('T')[0];
+
+
+
+
+
 
 
     let gauge;
@@ -56,6 +75,24 @@ async function loadNames() {
         document.getElementById("remainingtime").innerHTML = daytillendofbullrun;
         document.getElementById("bullstartsincetext").innerHTML = "<div>Days since start of bullrun:</div>";
         document.getElementById("bullstartsince").innerHTML = bullstartsince;
+        document.getElementById("bullenddatetext").innerHTML = "<div>Bull end date:</div>";
+        document.getElementById("bullenddatetext").style.color = "red";
+        document.getElementById("bullenddate").innerHTML = new Date(calculerDateEvenement(daytillendofbullrun)).toISOString().split('T')[0];
+        document.getElementById("bullenddate").style.color = "red";
+        document.getElementById("bullstartdatetext").innerHTML = "<div>Bull start date:</div>";
+        document.getElementById("bullstartdatetext").style.color = "white";
+        document.getElementById("bullstartdate").innerHTML = new Date(calculerDateEvenement2(bullstartsince)).toISOString().split('T')[0];
+        document.getElementById("bullstartdate").style.color = "white";
+
+        document.getElementById("stopdcaintext").innerHTML = "<div>Stop DCA in date:</div>";
+        document.getElementById("stopdcaintext").style.color = "purple";
+        document.getElementById("stopdcain").innerHTML = new Date(calculerDateEvenement(daystillstopdcain)).toISOString().split('T')[0];
+        document.getElementById("stopdcain").style.color = "purple";
+        document.getElementById("startdcaouttext").innerHTML = "<div>Start DCA out date:</div>";
+        document.getElementById("startdcaouttext").style.color = "orange";
+        document.getElementById("startdcaout").innerHTML = new Date(calculerDateEvenement(daystillstartdcaout)).toISOString().split('T')[0];
+        document.getElementById("startdcaout").style.color = "orange";
+
         gauge = blocksincehalving + 70000;
 
     } else
@@ -78,6 +115,7 @@ async function loadNames() {
 
 
 
+
     var data = [{
         domain: { x: [0, 1], y: [0, 1] },
         value: gauge,
@@ -93,7 +131,10 @@ async function loadNames() {
             bordercolor: "gray",
             steps: [
                 { range: [0, 70000], color: "green" },
-                { range: [70000, 140000], color: "purple" },
+                { range: [70000, 78640], color: "blue" },
+                { range: [78640, 105000], color: "purple" },
+                { range: [105000, 113640], color: "yellow" },
+                { range: [113640, 140000], color: "orange" },
                 { range: [140000, 210000], color: "red" }
             ],
             threshold: {
@@ -115,6 +156,28 @@ async function loadNames() {
     Plotly.newPlot('myDiv', data, layout);
 
     // logs [{ name: 'Joker'}, { name: 'Batman' }]
+
+
+    function calculerDateEvenement(joursRestants) {
+        var dateActuelle = new Date();
+        dateActuelle.setDate(dateActuelle.getDate() + joursRestants);
+        return dateActuelle;
+    }
+
+    function calculerDateEvenement2(joursRestants2) {
+        var dateActuelle2 = new Date();
+        dateActuelle2.setDate(dateActuelle2.getDate() - joursRestants2);
+        return dateActuelle2;
+    }
+
+    var joursRestants = daystillnexthalving;
+    var dateEvenement = calculerDateEvenement(joursRestants);
+
+    document.getElementById("dateActuelle").innerHTML += new Date().toISOString().split('T')[0];
+    document.getElementById("dateEvenement").innerHTML += dateEvenement.toISOString().split('T')[0];
+
+
+
 }
 
 loadNames();
