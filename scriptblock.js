@@ -8,6 +8,17 @@ async function loadNames() {
 
     let nexthalving = 0;
 
+    // Déclaration de la variable numberofblocktillstart avec la valeur initiale de latestblock
+
+
+    let numberofblocktillstart2 = latestblock;
+    //let numberofblocktillstart2 = 142000;
+
+    // Tant que latestblock est supérieur ou égal à 210000, on retranche 210000 de latestblock
+    while (numberofblocktillstart2 >= 210000) {
+        numberofblocktillstart2 -= 210000;
+    }
+
     // if (blocksincehalving>210000){
     //latesthalving = latesthalving + 210000;
 
@@ -16,13 +27,24 @@ async function loadNames() {
 
     }
 
-    let latesthalving = nexthalving - 210000;
+    if ((0 < numberofblocktillstart2 && numberofblocktillstart2 < 70000)) {
+        nexthalving -= 210000;
 
+    } else {
+
+        nexthalving -= 0;
+    }
+
+    let latesthalving = nexthalving - 210000;
     let blocksincehalving = latestblock - nexthalving;
 
     let bullstart = latesthalving - 70000;
+
+
     let bullend = latesthalving + 70000;
+
     let nextbullstart = nexthalving - 70000;
+
     let nextbullend = nexthalving + 70000;
 
 
@@ -31,11 +53,14 @@ async function loadNames() {
 
     let remainingblocktillendofbullrun = nextbullend - latestblock;
     let remainingblocktillnexthalving = nexthalving - latestblock;
+    let remainingblocktillnexthalving2 = nexthalving + 210000 - latestblock;
+
     let daytillendofbullrun = (remainingblocktillendofbullrun * 10) / 1440;
     let bullstartsince = ((latestblock - nextbullstart) * 10) / 1440;
     let bearstartsince = ((latestblock - (latesthalving + 70000)) * 10) / 1440;
 
     let daystillnexthalving = (remainingblocktillnexthalving * 10) / 1440;
+    let daystillnexthalving2 = (remainingblocktillnexthalving2 * 10) / 1440;
 
     let daystillstopdcain = ((remainingblocktillnexthalving + 8640) * 10) / 1440;
 
@@ -43,14 +68,34 @@ async function loadNames() {
     let daystillstartdcaout = ((remainingblocktillnexthalving + 35000 + 8640) * 10) / 1440;
 
 
-    document.getElementById("numberdaystillnexthalving").innerHTML = daystillnexthalving;
+    //document.getElementById("numberdaystillnexthalving").innerHTML = daystillnexthalving;
 
     document.getElementById("bullstart").innerHTML = nextbullstart;
     document.getElementById("bullend").innerHTML = nextbullend;
 
-    document.getElementById("lasthalving").innerHTML = latesthalving;
+    //document.getElementById("lasthalving").innerHTML = latesthalving;
 
-    document.getElementById("nexthalving").innerHTML = nexthalving;
+    //document.getElementById("nexthalving").innerHTML = nexthalving;
+
+    if ((0 < numberofblocktillstart2 && numberofblocktillstart2 < 70000)) {
+        document.getElementById("lasthalving").innerHTML = latesthalving + 210000;
+        document.getElementById("nexthalving").innerHTML = nexthalving + 210000;
+
+    } else {
+
+        document.getElementById("lasthalving").innerHTML = latesthalving;
+        document.getElementById("nexthalving").innerHTML = nexthalving;
+    }
+
+
+    if ((0 < numberofblocktillstart2 && numberofblocktillstart2 < 70000)) {
+
+        document.getElementById("numberdaystillnexthalving").innerHTML = daystillnexthalving2;
+
+    } else {
+
+        document.getElementById("numberdaystillnexthalving").innerHTML = daystillnexthalving;
+    }
 
 
     document.getElementById("halvingdate").innerHTML = new Date(calculerDateEvenement(daystillnexthalving)).toISOString().split('T')[0];
@@ -65,7 +110,43 @@ async function loadNames() {
 
 
 
-    if ((latestblock > latesthalving && latestblock < latesthalving + 70000) || (latestblock > nextbullstart && latestblock < nexthalving)) {
+    if ((140000 < numberofblocktillstart2 && numberofblocktillstart2 < 210000)) {
+
+        document.getElementById("santimant").innerHTML = "<div>bullmarket</div>";
+        document.getElementById("santimantcolor").style.backgroundColor = "green";
+        document.getElementById("remainingblocktext").innerHTML = "<div>Remaining blocks till end of bullrun:</div>";
+        document.getElementById("remainingblock").innerHTML = remainingblocktillendofbullrun;
+        document.getElementById("remainingtimetext").innerHTML = "<div>Days until end of bullrun:</div>";
+        document.getElementById("remainingtime").innerHTML = daytillendofbullrun;
+        document.getElementById("bullstartsincetext").innerHTML = "<div>Days since start of bullrun:</div>";
+        document.getElementById("bullstartsince").innerHTML = bullstartsince;
+        document.getElementById("bullenddatetext").innerHTML = "<div>Bull end date:</div>";
+        document.getElementById("bullenddatetext").style.color = "red";
+        document.getElementById("bullenddate").innerHTML = new Date(calculerDateEvenement(daytillendofbullrun)).toISOString().split('T')[0];
+        document.getElementById("bullenddate").style.color = "red";
+
+        document.getElementById("bullstartdatetext").innerHTML = "<div>Bull start date:</div>";
+        document.getElementById("bullstartdatetext").style.color = "white";
+        document.getElementById("bullstartdate").innerHTML = new Date(calculerDateEvenement2(bullstartsince)).toISOString().split('T')[0];
+        document.getElementById("bullstartdate").style.color = "white";
+
+        document.getElementById("stopdcaintext").innerHTML = "<div>Stop DCA in date:</div>";
+        document.getElementById("stopdcaintext").style.color = "purple";
+        document.getElementById("stopdcain").innerHTML = new Date(calculerDateEvenement(daystillstopdcain)).toISOString().split('T')[0];
+        document.getElementById("stopdcain").style.color = "purple";
+        document.getElementById("startdcaouttext").innerHTML = "<div>Start DCA out date:</div>";
+        document.getElementById("startdcaouttext").style.color = "orange";
+        document.getElementById("startdcaout").innerHTML = new Date(calculerDateEvenement(daystillstartdcaout)).toISOString().split('T')[0];
+        document.getElementById("startdcaout").style.color = "orange";
+
+        gauge = numberofblocktillstart2 - 140000;
+
+
+
+
+    }
+
+    if ((0 < numberofblocktillstart2 && numberofblocktillstart2 < 70000)) {
 
         document.getElementById("santimant").innerHTML = "<div>bullmarket</div>";
         document.getElementById("santimantcolor").style.backgroundColor = "green";
@@ -93,9 +174,13 @@ async function loadNames() {
         document.getElementById("startdcaout").innerHTML = new Date(calculerDateEvenement(daystillstartdcaout)).toISOString().split('T')[0];
         document.getElementById("startdcaout").style.color = "orange";
 
-        gauge = blocksincehalving + 70000;
+        gauge = numberofblocktillstart2 + 70000;
 
-    } else
+
+
+
+    }
+    if ((70000 < numberofblocktillstart2 && numberofblocktillstart2 < 140000))
 
     {
 
@@ -108,7 +193,26 @@ async function loadNames() {
         document.getElementById("remainingtime").innerHTML = daytillnextbullstart;
         document.getElementById("bullstartsincetext").innerHTML = "<div>Days since start of bearmarket:</div>";
         document.getElementById("bullstartsince").innerHTML = bearstartsince;
-        gauge = latestblock - latesthalving + 70000;
+
+        document.getElementById("bullstartdatetext").innerHTML = "<div>Bull start date:</div>";
+        document.getElementById("bullstartdatetext").style.color = "white";
+        document.getElementById("bullstartdate").innerHTML = new Date(calculerDateEvenement2(bullstartsince)).toISOString().split('T')[0];
+        document.getElementById("bullstartdate").style.color = "white";
+
+        document.getElementById("stopdcaintext").innerHTML = "<div>Stop DCA in date:</div>";
+        document.getElementById("stopdcaintext").style.color = "purple";
+        document.getElementById("stopdcain").innerHTML = new Date(calculerDateEvenement(daystillstopdcain)).toISOString().split('T')[0];
+        document.getElementById("stopdcain").style.color = "purple";
+        document.getElementById("startdcaouttext").innerHTML = "<div>Start DCA out date:</div>";
+        document.getElementById("startdcaouttext").style.color = "orange";
+        document.getElementById("startdcaout").innerHTML = new Date(calculerDateEvenement(daystillstartdcaout)).toISOString().split('T')[0];
+        document.getElementById("startdcaout").style.color = "orange";
+        document.getElementById("bullenddatetext").innerHTML = "<div>Bull end date:</div>";
+        document.getElementById("bullenddatetext").style.color = "green";
+        document.getElementById("bullenddate").innerHTML = new Date(calculerDateEvenement(daytillendofbullrun)).toISOString().split('T')[0];
+        document.getElementById("bullenddate").style.color = "green";
+
+        gauge = numberofblocktillstart2 + 70000;
 
     }
 
@@ -122,7 +226,7 @@ async function loadNames() {
         title: { text: "Block Meter" },
         type: "indicator",
         mode: "gauge+number+delta",
-        delta: { reference: 140000, increasing: { color: "RebeccaPurple" } },
+        delta: { reference: 70000 },
         gauge: {
             axis: { range: [0, 210000], tickwidth: 1, tickcolor: "darkblue" },
             bar: { color: "black" },
@@ -138,9 +242,9 @@ async function loadNames() {
                 { range: [140000, 210000], color: "red" }
             ],
             threshold: {
-                line: { color: "white", width: 4 },
-                thickness: 0.75,
-                value: blocksincehalving + 70000
+                line: { color: "white", width: 1 },
+                thickness: 1,
+                value: numberofblocktillstart2 + 70000
             }
         }
     }];
